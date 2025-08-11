@@ -1,0 +1,242 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link rel="icon" type="image/png" href="https://javascript.ir/favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="./style/style.css">
+
+    <script src="script.js" defer></script>
+
+  <title>Twitter</title>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- LEFT NAV -->
+
+    <nav class="nav" aria-label="Primary">
+
+      <div class="logo">
+
+        <div class="mark">T</div>
+
+        <div>
+
+          <div style="font-weight:800">Tweeter</div>
+
+          <div class="muted" style="font-size:12px">Social demo</div>
+
+        </div>
+
+      </div>
+
+      <a href="#" class="home"><span class="icon">🏠</span> Home</a>
+
+      <a href="#"><span class="icon">🔍</span> Explore</a>
+
+      <a href="#"><span class="icon">🔔</span> Notifications</a>
+
+      <a href="#"><span class="icon">✉️</span> Messages</a>
+
+      <a href="#"><span class="icon">🔖</span> Bookmarks</a>
+
+      <a href="#"><span class="icon">📋</span> Lists</a>
+
+      <a href="#"><span class="icon">👤</span> Profile</a>
+
+      <a href="#"><span class="icon">⋯</span> More</a>
+
+      <div style="margin-top:18px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.02);font-size:13px;color:var(--muted)">
+
+        <div>Logged in as <strong>@example</strong></div>
+
+      </div>
+
+    </nav>
+
+    <!-- CENTER -->
+
+    <body class="body">
+
+    <div class="body__container">
+
+        <!-- <footer class="footer">
+            <small class="copyright">
+                <p class="copyright__text">© Copyright by <a href="https://bytegrad.com" class="copyright__link"
+                        target="_blank">JavaScript.ir</a> <i class="fa-solid fa-square-up-right copyright__icon"></i>
+                    Intended for learning or your portfolio.</p>
+                <p class="copyright__text"><span class="u-bold u-italic">Not allowed</span> to use as your own teaching
+                    material.</p>
+            </small>
+        </footer> -->
+
+        <main class="app">
+
+            <header class="header">
+
+                <img src="https://bytegrad.com/course-assets/js/1/pattern.svg" alt="pattern" class="header__pattern">
+
+                <a href="." class="logo">
+                    
+                  <img src="https://bytegrad.com/course-assets/js/1/logo.svg" alt="logo" class="logo__img">
+                
+                </a>
+                
+                <h1 class="first-heading">Write<span class="u-italic u-transparent">Tweet.</span></h1>
+                
+                <form action="#" class="form">
+                    
+                  <textarea class="form__textarea" id="textarea" spellcheck="false" maxlength="150" type="text"
+                        placeholder="Enter feedback"></textarea>
+                    
+                        <label for="textarea" class="form__label">Enter your Tweet here, remember to <span
+                            class="u-medium">#hashtag</span> the company <i
+                            class="fa-solid fa-pen form__icon"></i></label>
+                    
+                            <div class="form__bottom">
+                        
+                              <p class="counter u-italic">150</p>
+                        
+                              <button class="submit-btn">
+                            
+                                <span class="submit-btn__text">Submit</span>
+                        
+                              </button>
+                    
+                            </div>
+                
+                          </form>
+            </header>
+
+            <ol class="feedbacks">
+                
+              <div class="spinner"></div>
+            
+            </ol>
+        
+          </main>
+
+        <ul class="hashtags">
+            
+          <li class="hashtags__item">
+                
+            <button class="hashtag">#JavaScript.ir</button>
+            
+          </li>
+            
+          <li class="hashtags__item">
+                
+            <button class="hashtag">#Nike</button>
+            
+          </li>
+            
+          <li class="hashtags__item">
+                
+            <button class="hashtag">#Starbucks</button>
+            
+          </li>
+            
+          <li class="hashtags__item">
+                
+            <button class="hashtag">#Netflix</button>
+            
+          </li>
+            
+          <li class="hashtags__item">
+                
+            <button class="hashtag">#Amazon</button>
+            
+          </li>
+            
+          <li class="hashtags__item">
+                
+            <button class="hashtag">#Microsoft</button>
+            
+          </li>
+            
+          <li class="hashtags__item">
+                
+            <button class="hashtag">#Adidas</button>
+            
+          </li>
+            
+          <li class="hashtags__item">
+                
+            <button class="hashtag">#McDonald's</button>
+            
+          </li>
+        
+        </ul>
+    
+      </div>
+
+    <!-- Right sidebar
+    <aside class="aside" aria-label="Secondary">
+      <div class="search"><span>🔎</span><input placeholder="Search Tweeter" aria-label="Search" /></div>
+
+      <section class="trends">
+        <h3>Trends for you</h3>
+        <div class="trend">
+          <div class="muted" style="font-size:12px">Technology · Trending</div>
+          <div style="font-weight:700">AI UX patterns</div>
+          <div class="muted" style="font-size:13px">24.5K Tweets</div>
+        </div>
+        <div class="trend">
+          <div class="muted" style="font-size:12px">Sports · Trending</div>
+          <div style="font-weight:700">Summer Cup 2025</div>
+          <div class="muted" style="font-size:13px">8,123 Tweets</div>
+        </div>
+      </section>
+
+      <section class="who-to-follow" style="margin-top:12px">
+        <h3>Who to follow</h3>
+        <div class="person">
+          <div class="avatar">R</div>
+          <div>
+            <div style="font-weight:700">Rana</div>
+            <div class="muted" style="font-size:13px">@ranacodes</div>
+          </div>
+          <button class="follow-btn">Follow</button>
+        </div>
+        <div class="person">
+          <div class="avatar">C</div>
+          <div>
+            <div style="font-weight:700">Carlos</div>
+            <div class="muted" style="font-size:13px">@carlosdev</div>
+          </div>
+          <button class="follow-btn">Follow</button>
+        </div>
+      </section>
+
+      <div style="margin-top:18px;font-size:13px;color:var(--muted)">
+        <div>Terms · Privacy · Cookies</div>
+      </div>
+    </aside> -->
+  </div>
+</body>
+</html>
