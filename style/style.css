@@ -695,6 +695,9 @@ button {
 @media (max-height: 925px) {
   .body {
     padding: 60px 0;
+  .nav,
+  .aside {
+    width: 100%
   }
 }
 
@@ -708,14 +711,14 @@ button {
     display: none;
   }
 
-  .footer {
+  /* .footer {
     transform: initial;
     position: relative;
     left: initial;
     bottom: initial;
     text-align: center;
     margin-top: 20px;
-  }
+  } */
 }
 
 @media (max-width: 775px) {
@@ -745,6 +748,10 @@ button {
 
   .feedback__date {
     margin-left: auto;
+  }
+  .nav,
+  .aside {
+    width: 100%
   }
 }
 
@@ -805,13 +812,10 @@ button {
     grid-template-columns: 1fr;
     max-width: 760px;
   }
-  .nav,
+  /* .nav,
   .aside {
-    display: none;
-  }
-  body {
-    padding: 12px;
-  }
+    width: 100%
+  } */
 }
 
 /* utility */
