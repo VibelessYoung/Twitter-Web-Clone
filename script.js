@@ -66,4 +66,34 @@ const formhandler = (event) => {
     counterEl.textContent = 150;
 };
 
+fetch('https://bytegrad.com/course-assets/js/1/api/feedbacks')
+.then(response =>{
+    return response.json();
+}).then(data =>{
+    document.querySelector(".spinner").remove();
+    data.feedbacks.forEach(feedItem =>{
+        const feedsItem = `
+        <li class="feedback">
+                <button class="upvote">
+                    <i class="fa-solid fa-caret-up upvote__icon"></i>
+                    <span class="upvote__count">${feedItem.upvoteCount}</span>
+                </button>
+                <section class="feedback__badge">
+                    <p class="feedback__letter">${feedItem.badgeLetter}</p>
+                </section>
+                <div class="feedback__content">
+                    <p class="feedback__company">${feedItem.company}</p>
+                    <p class="feedback__text">
+                    ${feedItem.text}
+                    </p>
+                </div>
+                <p class="feedback__date">${feedItem.daysAgo === 0 ? 'NEW' : `${feedItem.daysAgo}d`}</p>
+            </li>
+        `;
+        feedsEL.insertAdjacentHTML('beforeend', feedsItem);
+    });
+  })
+  .catch(err => console.error("Error fetching data:", err));
+
+
 formEl.addEventListener("submit", formhandler);
