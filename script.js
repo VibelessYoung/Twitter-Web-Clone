@@ -15,6 +15,13 @@ const formhandler = (event) => {
   event.preventDefault();
   const txt = txtareaEL.value;
 
+  if (txtareaEL.value.length < 5 || !txtareaEL.value.includes("#")) {
+    [...formEl.elements].forEach((el) => (el.disabled = true));
+    setTimeout(() => {
+      [...formEl.elements].forEach((el) => (el.disabled = false));
+    }, 2000);
+  }
+
   if (txt.includes("#")) {
     formEl.classList.add("form--valid");
     setTimeout(() => {
@@ -25,14 +32,15 @@ const formhandler = (event) => {
     setTimeout(() => {
       formEl.classList.remove("form--invalid");
     }, 3000);
+    txtareaEL.focus();
+    return;
   }
-  
-  if (txtareaEL.value.length < 5 || !txtareaEL.value.includes("#")) {
-    [...formEl.elements].forEach(el => el.disabled = true);
-    setTimeout(() => {
-        [...formEl.elements].forEach(el => el.disabled = false);
-    }, 3000);
-  }
+
+  const hashtag = txt.split(" ").find((word) => word.includes("#"));
+  const company = hashtag.substring(1);
+  const days = 0;
+  const vote = 0;
+  const letter = company.substring(0,1).toUpperCase();
 };
 
 formEl.addEventListener("submit", formhandler);
