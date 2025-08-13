@@ -4,6 +4,7 @@ const formEl = document.querySelector(".form");
 const feedsEL = document.querySelector(".feedbacks");
 const submitEL = document.querySelector(".submit-btn");
 const BASE_API_URL = "https://bytegrad.com/course-assets/js/1/api";
+const hashtagListEL = document.querySelector('.hashtags');
 
 const inputhandler = () => {
   const typedChars = txtareaEL.value.length;
@@ -135,3 +136,26 @@ const clickhandler = (event) => {
 };
 
 feedsEL.addEventListener("click", clickhandler);
+
+const hashtagClickHandler = event => {
+    const clickedEl = event.target;
+
+    if (clickedEl.className === 'hashtags') return;
+
+    const companyNameFromHastag = clickedEl.textContent.substring(1).trim();
+
+    feedsEL.childNodes.forEach(childNode => {
+        if (childNode.nodeType === 3) return;
+
+        const companyNameFromFeedbackItem = childNode.
+            querySelector('.feedback__company')
+            .textContent.toLowerCase().trim();
+
+        if(companyNameFromHastag.toLowerCase().trim() !== companyNameFromFeedbackItem)
+            {
+                childNode.remove();
+            }
+    });
+
+};
+hashtagListEL.addEventListener('click', hashtagClickHandler);
