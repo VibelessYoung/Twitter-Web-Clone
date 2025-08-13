@@ -2,7 +2,8 @@ const txtareaEL = document.querySelector(".form__textarea");
 const counterEl = document.querySelector(".counter");
 const formEl = document.querySelector(".form");
 const feedsEL = document.querySelector(".feedbacks");
-const submitEL = document.querySelector('.submit-btn')
+const submitEL = document.querySelector(".submit-btn");
+const BASE_API_URL = "https://bytegrad.com/course-assets/js/1/api";
 
 const inputhandler = () => {
   const typedChars = txtareaEL.value.length;
@@ -42,7 +43,7 @@ const formhandler = (event) => {
   const company = hashtag.substring(1);
   const date = 0;
   const upvote = 0;
-  const letter = company.substring(0,1).toUpperCase();
+  const letter = company.substring(0, 1).toUpperCase();
   const feedItem = `
     <li class="feedback">
             <button class="upvote">
@@ -56,23 +57,41 @@ const formhandler = (event) => {
                 <p class="feedback__company">${company}</p>
                 <p class="feedback__text">${txt}</p>
             </div>
-            <p class="feedback__date">${date === 0 ? 'New' : `${date}d`}</p>
+            <p class="feedback__date">${date === 0 ? "New" : `${date}d`}</p>
         </li>
     `;
 
-    feedsEL.insertAdjacentHTML('beforeend',feedItem);
-    txtareaEL.value ='';
-    submitEL.blur();
-    counterEl.textContent = 150;
+  feedsEL.insertAdjacentHTML("beforeend", feedItem);
+  txtareaEL.value = "";
+  submitEL.blur();
+  counterEl.textContent = 150;
+
+  fetch(`${BASE_API_URL}/feedbacks`, {
+    method: "POST",
+    body: JSON.stringify(feedItem),
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        console.log("Something went wrong");
+        return;
+      }
+      console.log("Successfuly submitted");
+    })
+    .catch((error) => console.log(error));
 };
 
-fetch('https://bytegrad.com/course-assets/js/1/api/feedbacks')
-.then(response =>{
+fetch(`${BASE_API_URL}/feedbacks`)
+  .then((response) => {
     return response.json();
-}).then(data =>{
+  })
+  .then((data) => {
     document.querySelector(".spinner").remove();
-    data.feedbacks.forEach(feedItem =>{
-        const feedsItem = `
+    data.feedbacks.forEach((feedItem) => {
+      const feedsItem = `
         <li class="feedback">
                 <button class="upvote">
                     <i class="fa-solid fa-caret-up upvote__icon"></i>
@@ -87,13 +106,32 @@ fetch('https://bytegrad.com/course-assets/js/1/api/feedbacks')
                     ${feedItem.text}
                     </p>
                 </div>
-                <p class="feedback__date">${feedItem.daysAgo === 0 ? 'NEW' : `${feedItem.daysAgo}d`}</p>
+                <p class="feedback__date">${
+                  feedItem.daysAgo === 0 ? "NEW" : `${feedItem.daysAgo}d`
+                }</p>
             </li>
         `;
-        feedsEL.insertAdjacentHTML('beforeend', feedsItem);
+      feedsEL.insertAdjacentHTML("beforeend", feedsItem);
     });
   })
-  .catch(err => console.error("Error fetching data:", err));
-
+  .catch((err) => console.error("Error fetching data:", err));
 
 formEl.addEventListener("submit", formhandler);
+
+const clickhandler = (event) => {
+  const clickedEL = event.target;
+  const upvoteEL = clickedEL.className.includes("upvote");
+
+  if (upvoteEL) {
+    const upvotebtnEL = clickedEL.closest('.upvote');
+    upvotebtnEL.disabled = true;
+
+    const votecountEL = upvotebtnEL.querySelector('.upvote__count');
+    let votecount = +upvotebtnEL.textContent;
+    votecountEL.textContent = ++votecount;
+  } else {
+    clickedEL.closest('.feedback').classList.toggle('feedback--expand');
+  }
+};
+
+feedsEL.addEventListener("click", clickhandler);
