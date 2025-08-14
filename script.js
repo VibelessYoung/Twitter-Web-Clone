@@ -1,11 +1,16 @@
+/* DATA */
+
 const txtareaEL = document.querySelector(".form__textarea");
 const counterEl = document.querySelector(".counter");
 const formEl = document.querySelector(".form");
 const feedsEL = document.querySelector(".feedbacks");
 const submitEL = document.querySelector(".submit-btn");
 const BASE_API_URL = "https://bytegrad.com/course-assets/js/1/api";
-const hashtagListEL = document.querySelector('.hashtags');
+const hashtagListEL = document.querySelector(".hashtags");
 
+/* FUNCTIONS */
+
+//CHECK MAX CHARACTER
 const inputhandler = () => {
   const typedChars = txtareaEL.value.length;
   const maxChars = 150;
@@ -15,6 +20,7 @@ const inputhandler = () => {
 
 txtareaEL.addEventListener("input", inputhandler);
 
+//CONTROL FORM INPUTS
 const formhandler = (event) => {
   event.preventDefault();
   const txt = txtareaEL.value;
@@ -40,6 +46,7 @@ const formhandler = (event) => {
     return;
   }
 
+  //ADD TWITTES
   const hashtag = txt.split(" ").find((word) => word.includes("#"));
   const company = hashtag.substring(1);
   const date = 0;
@@ -67,6 +74,7 @@ const formhandler = (event) => {
   submitEL.blur();
   counterEl.textContent = 150;
 
+  //POST DATA TO API
   fetch(`${BASE_API_URL}/feedbacks`, {
     method: "POST",
     body: JSON.stringify(feedItem),
@@ -85,6 +93,7 @@ const formhandler = (event) => {
     .catch((error) => console.log(error));
 };
 
+//LOAD DATA FROM API
 fetch(`${BASE_API_URL}/feedbacks`)
   .then((response) => {
     return response.json();
@@ -119,43 +128,46 @@ fetch(`${BASE_API_URL}/feedbacks`)
 
 formEl.addEventListener("submit", formhandler);
 
+//CONTROL VOTES
 const clickhandler = (event) => {
   const clickedEL = event.target;
   const upvoteEL = clickedEL.className.includes("upvote");
 
   if (upvoteEL) {
-    const upvotebtnEL = clickedEL.closest('.upvote');
+    const upvotebtnEL = clickedEL.closest(".upvote");
     upvotebtnEL.disabled = true;
 
-    const votecountEL = upvotebtnEL.querySelector('.upvote__count');
+    const votecountEL = upvotebtnEL.querySelector(".upvote__count");
     let votecount = +upvotebtnEL.textContent;
     votecountEL.textContent = ++votecount;
   } else {
-    clickedEL.closest('.feedback').classList.toggle('feedback--expand');
+    clickedEL.closest(".feedback").classList.toggle("feedback--expand");
   }
 };
 
+//FILTER
 feedsEL.addEventListener("click", clickhandler);
 
-const hashtagClickHandler = event => {
-    const clickedEl = event.target;
+const hashtagClickHandler = (event) => {
+  const clickedEl = event.target;
 
-    if (clickedEl.className === 'hashtags') return;
+  if (clickedEl.className === "hashtags") return;
 
-    const companyNameFromHastag = clickedEl.textContent.substring(1).trim();
+  const companyNameFromHastag = clickedEl.textContent.substring(1).trim();
 
-    feedsEL.childNodes.forEach(childNode => {
-        if (childNode.nodeType === 3) return;
+  feedsEL.childNodes.forEach((childNode) => {
+    if (childNode.nodeType === 3) return;
 
-        const companyNameFromFeedbackItem = childNode.
-            querySelector('.feedback__company')
-            .textContent.toLowerCase().trim();
+    const companyNameFromFeedbackItem = childNode
+      .querySelector(".feedback__company")
+      .textContent.toLowerCase()
+      .trim();
 
-        if(companyNameFromHastag.toLowerCase().trim() !== companyNameFromFeedbackItem)
-            {
-                childNode.remove();
-            }
-    });
-
+    if (
+      companyNameFromHastag.toLowerCase().trim() !== companyNameFromFeedbackItem
+    ) {
+      childNode.remove();
+    }
+  });
 };
-hashtagListEL.addEventListener('click', hashtagClickHandler);
+hashtagListEL.addEventListener("click", hashtagClickHandler);
